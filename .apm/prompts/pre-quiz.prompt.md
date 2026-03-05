@@ -26,7 +26,15 @@ Generate the incorrect answer options. Distractors must be plausible and challen
 
 ## Step 4 — Randomise option order
 
-Shuffle all answer options (correct answer and distractors) into a random order before presenting. The tool may visually highlight the first option, so randomisation is the only reliable way to prevent the correct answer from appearing in a predictable position.
+Do **not** rely on your own internal ordering to shuffle options — LLM outputs are not random and will produce statistically predictable patterns (typically placing the correct answer first). Instead, use #tool:execute to run the following one-liner, which produces a genuine random position for the correct answer:
+
+```bash
+python3 -c "import random; print(random.randint(0, 3))"
+```
+
+The integer printed (0 = first slot, 1 = second, 2 = third, 3 = fourth) is the 0-based index at which the correct answer must be placed. Fill the remaining slots, in any order, with the distractors.
+
+If the quiz has a number of options other than 4, adjust the upper bound accordingly (e.g. `random.randint(0, 2)` for 3 options).
 
 ## Step 5 — Present the quiz
 

@@ -9,7 +9,7 @@ Rather than handing out code and commands, Preceptor walks you through the *why*
 - **Socratic questioning** — asks open-ended, guiding questions before revealing answers or writing code
 - **Step-by-step explanations** — explains the logic and rationale before generating any code
 - **Command narration** — presents and justifies every terminal command before running it, with an explicit confirmation step
-- **Adaptive quizzes** — tests understanding with plausible distractors targeting your recorded misconceptions
+- **Adaptive quizzes** — tests understanding with plausible distractors targeting your recorded misconceptions; correct answer position is randomised by executing code at quiz time, preventing the predictable bias of LLM-generated "shuffles"
 - **Learning tracking** — maintains an evolving `learning/WEAKNESSES.md` across sessions, adding new misconceptions as they surface and removing them once the learner proves they've been resolved
 - **Session logs** — writes a journal of each session to `learning/logs/<date>-<sessionID>.md`
 - **Learning data protection** — ensures `learning/` is excluded from version control automatically
@@ -31,6 +31,7 @@ Or via Homebrew or pip — see the [APM getting started guide](https://github.co
 **2. Add Preceptor to your project**
 
 ```sh
+cd /path/to/your/project
 apm install francesco-kruk/preceptor-mode
 apm compile
 ```
