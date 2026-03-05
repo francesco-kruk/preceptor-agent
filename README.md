@@ -10,7 +10,7 @@ Rather than handing out code and commands, Preceptor walks you through the *why*
 - **Step-by-step explanations** — explains the logic and rationale before generating any code
 - **Command narration** — presents and justifies every terminal command before running it, with an explicit confirmation step
 - **Adaptive quizzes** — tests understanding with plausible distractors targeting your recorded misconceptions
-- **Learning tracking** — maintains `learning/WEAKNESSES.md` across sessions
+- **Learning tracking** — maintains an evolving `learning/WEAKNESSES.md` across sessions, adding new misconceptions as they surface and removing them once the learner proves they've been resolved
 - **Session logs** — writes a journal of each session to `learning/logs/<date>-<sessionID>.md`
 - **Learning data protection** — ensures `learning/` is excluded from version control automatically
 
@@ -62,9 +62,25 @@ Preceptor automatically creates a `learning/` directory in your project root:
 
 ```
 learning/
-├── WEAKNESSES.md         # Recorded misconceptions to target in future sessions
+├── WEAKNESSES.md         # Evolving record of active misconceptions and struggles — entries are added when gaps are detected and removed once the learner demonstrates they've been resolved
 └── logs/
     └── <date>-<id>.md    # Per-session learning journal
 ```
 
 This directory is added to `.gitignore` automatically to keep your learning data private.
+
+## Package Structure
+
+```
+.apm/
+├── agents/
+│   └── Preceptor.agent.md            # Agent persona, rules, and directives
+├── prompts/
+│   ├── pre-execute.prompt.md         # Workflow: explain every command before running it
+│   ├── pre-quiz.prompt.md            # Workflow: prepare and present a quiz
+│   └── post-quiz.prompt.md           # Workflow: review quiz answers and record misconceptions
+└── context/
+    └── weaknesses-schema.context.md  # Schema for learning/WEAKNESSES.md
+```
+
+The agent file is a slim entry point that links out to the prompt and context primitives. This means you can inspect or override any individual workflow without touching the agent persona itself.
